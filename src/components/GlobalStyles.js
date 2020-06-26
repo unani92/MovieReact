@@ -16,6 +16,10 @@ const GlobalStyles = createGlobalStyle
     background-color: #f8f7fa;
     padding-top:50px;
   }
+  .homeMovie {
+    width: 300px;
+    height: auto;
+  }
 `
 
 export default GlobalStyles
