@@ -4,6 +4,7 @@ import Header from "./Header";
 import Home from "./Home";
 import TV from "../routes/TV";
 import Search from "../routes/Search";
+import Detail from "../routes/Detail";
 
 function Router() {
   return (
@@ -15,6 +16,7 @@ function Router() {
         <Route path="/tv" exact component={TV}/>
         <Route path="/tv/popular" render={() => (<h1>Popular</h1>)}/>
         <Route path="/search" component={Search}/>
+        <Route path="/:id" component={Detail}/>
         {/* 해당하는 라우트가 없을 경우 홈으로 보내주세요.... */}
         <Redirect from="*" to="/"/>
       </Switch>

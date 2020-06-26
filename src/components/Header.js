@@ -40,7 +40,7 @@ function Header() {
     <Nav>
       <List>
         <Item>
-          <Link to="/"><i onClick={onClick} className="fas fa-home"></i></Link>
+          <Link to="/"><i onClick={onClick} className="fas fa-home selected"></i></Link>
         </Item>
         <Item>
           <Link to="/tv"><i onClick={onClick} className="fas fa-tv"></i></Link>
