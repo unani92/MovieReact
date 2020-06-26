@@ -1,12 +1,14 @@
 import { createGlobalStyle } from "styled-components"
-import reset from "styled-reset/lib";
 
 const GlobalStyles = createGlobalStyle
 `
-  ${reset};
   a {
     text-decoration: none;
-    color: inherit;
+    color: black;
+  }
+  a:hover {
+    text-decoration: none;
+    color: #9cb5a2
   }
   * {
     box-sizing: border-box;
@@ -19,6 +21,12 @@ const GlobalStyles = createGlobalStyle
   .homeMovie {
     width: 300px;
     height: auto;
+  }
+  .App {
+    margin-top: 31px;
+  }
+  .selected {
+    color: #9cb5a2;
   }
 `
 

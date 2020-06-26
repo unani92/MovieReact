@@ -2,40 +2,54 @@ import React from "react";
 import {Link} from "react-router-dom";
 import styled from "styled-components"
 
-const List = styled.ul`
+//stylesheet
+const Nav = styled.nav
+`
+  position: fixed;
+  background-color: #f8f7fa;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1
+`
+const List = styled.ul
+`
   display: flex;
   justify-content: center;
   list-style-type: none;
   font-size: 2rem;
   border-bottom: 1px solid;
 `
-const Item = styled.li`
+const Item = styled.li
+`
   margin: 1rem;
 `
-const Slink= styled(Link)`
-  color: black;
-  &:hover {
-  text-decoration: none;
-  color: #f54296
-  }
-`
 
+// component
 function Header() {
-
+  const onClick = event => {
+    const icons = document.querySelectorAll("i")
+    icons.forEach(icon => {
+      if (icon.classList.contains("selected")) {
+        icon.classList.remove("selected")
+      }
+    })
+    event.target.classList.add("selected")
+  }
   return (
-    <nav>
+    <Nav>
       <List>
         <Item>
-          <Slink to="/">Home</Slink>
+          <Link to="/"><i onClick={onClick} className="fas fa-home"></i></Link>
         </Item>
         <Item>
-          <Slink to="/tv">TV</Slink>
+          <Link to="/tv"><i onClick={onClick} className="fas fa-tv"></i></Link>
         </Item>
         <Item>
-          <Slink to="/search">Search</Slink>
+          <Link to="/search"><i onClick={onClick} className="fas fa-search"></i></Link>
         </Item>
       </List>
-    </nav>
+    </Nav>
   )
 }
 

@@ -1,38 +1,37 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios'
 import { connect } from "react-redux"
 import { addMovies } from "../store";
-import scrollMonitor from 'scrollmonitor'
 import Movie from "./Movie"
+import axios from 'axios'
+import scrollMonitor from 'scrollmonitor'
 
 function Home({ state, dispatch }) {
   const [isLoading,setIsLoading] = useState(true)
-  const [isScroll, setScroll] = useState(1)
+  const [pageNum, setPageNum] = useState(1)
 
   function myaxios() {
-    console.log(isScroll)
-    axios.get(`https://finprojectapi.herokuapp.com/api/v1/community/movies/?page=${isScroll}`)
+    axios.get(`https://finprojectapi.herokuapp.com/api/v1/community/movies/?page=${pageNum}`)
       .then(res => {
         dispatch(addMovies(res.data))
         if (isLoading) {setIsLoading(false)}
       })
       .catch(err => console.log(err))
   }
-  useEffect(myaxios,[isScroll])
+  useEffect(myaxios,[pageNum])
 
   if (!isLoading) {
     setTimeout(() => {
       const bottomSensor = document.getElementById("bottomSensor")
       const watcher = scrollMonitor.create(bottomSensor)
       watcher.enterViewport(() => setTimeout(
-        () => setScroll(isScroll+1)
+        () => setPageNum(pageNum+1)
       ),500)
     },500)
   }
 
   return (
     <div className="container">
-      {isLoading ? "is Loading" :
+      {isLoading ? <div className="text-center my-5"><i className="fas fa-spinner"></i></div> :
         (<div className="row">
           {state.map((movie,index) => (
             <div key={index} className="col-4">

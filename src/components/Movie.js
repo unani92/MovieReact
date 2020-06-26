@@ -2,9 +2,9 @@ import React from "react";
 
 function Movie({ id, title, poster_path }) {
   return (
-    <div>
+    <div className="m-4">
       <div>
-        <p>{title}</p>
+        <p className="text-center font-weight-light">{title}</p>
         <img className="homeMovie" id={id} src={`https://image.tmdb.org/t/p/w342/${poster_path}`}  alt=""/>
       </div>
     </div>
