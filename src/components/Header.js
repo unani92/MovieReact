@@ -8,7 +8,7 @@ const List = styled.ul`
   list-style-type: none;
   font-size: 2rem;
   border-bottom: 1px solid;
-`;
+`
 const Item = styled.li`
   margin: 1rem;
 `
