@@ -45,7 +45,8 @@ function Home({ state, dispatch }) {
   )
 }
 function mapStateToProps(state) {
-  return { state }
+  const { homeReducer } = state
+  return { state:homeReducer }
 }
 function mapDispatchToProps(dispatch) {
   return { dispatch }

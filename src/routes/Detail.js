@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from "react-router-dom"
 import { connect } from "react-redux"
 
 function Detail({movie}) {
@@ -12,8 +13,15 @@ function Detail({movie}) {
 }
 
 function mapStateToProps(state, ownProps) {
+  const location = ownProps.location.prev
   const {match:{params:{id}}} = ownProps
-  return {movie: state.find(movie => Number(movie.id) === Number(id))}
+  if (location === "/") {
+      const { homeReducer } = state
+      return {movie: homeReducer.find(movie => Number(movie.id) === Number(id))}
+  } else {
+      const { searchReducer } = state
+      return {movie: searchReducer.find(movie => Number(movie.id) === Number(id))}
+  }
 }
 
-export default connect(mapStateToProps,null) (Detail)
+export default connect(mapStateToProps,null) (withRouter(Detail))

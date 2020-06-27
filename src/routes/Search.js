@@ -57,7 +57,8 @@ function Search({ result, dispatch }) {
 }
 
 function mapStateToProps(state) {
-  return { result: state }
+  const { searchReducer } = state
+  return { result: searchReducer }
 }
 
 function mapDispatchToProps(dispatch) {
