@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components"
 
 //stylesheet
@@ -23,34 +23,31 @@ const List = styled.ul
 const Item = styled.li
 `
   margin: 1rem;
+  border-bottom: 4px solid ${props => props.current ? "#9cb5a2" : "transparent"}
+`
+const I = styled.i
+`
+  color: ${props => props.current ? "#9cb5a2" : "black"}
 `
 
+
 // component
-function Header() {
-  const onClick = event => {
-    const icons = document.querySelectorAll("i")
-    icons.forEach(icon => {
-      if (icon.classList.contains("selected")) {
-        icon.classList.remove("selected")
-      }
-    })
-    event.target.classList.add("selected")
-  }
+function Header({ location:{ pathname } }) {
   return (
     <Nav>
       <List>
-        <Item>
-          <Link to="/"><i onClick={onClick} className="fas fa-home selected"></i></Link>
+        <Item current={pathname === "/"}>
+          <Link to="/"><I current={pathname === "/"} className="fas fa-home"></I></Link>
         </Item>
-        <Item>
-          <Link to="/tv"><i onClick={onClick} className="fas fa-tv"></i></Link>
+        <Item current={pathname === "/tv"}>
+          <Link to="/tv"><I current={pathname === "/tv"} className="fas fa-tv"></I></Link>
         </Item>
-        <Item>
-          <Link to="/search"><i onClick={onClick} className="fas fa-search"></i></Link>
+        <Item current={pathname === "/search"}>
+          <Link to="/search"><I current={pathname === "/search"} className="fas fa-search"></I></Link>
         </Item>
       </List>
     </Nav>
   )
 }
 
-export default Header
+export default withRouter(Header)
