@@ -20,13 +20,22 @@ const GlobalStyles = createGlobalStyle
   }
   .homeMovie {
     width: 300px;
-    height: auto;
+    height: 400px;
   }
   .App {
     margin-top: 31px;
   }
   .selected {
     color: #9cb5a2;
+  }
+  .no-image {
+    width: 300px;
+    height: 400px;
+    border: 1px solid black;
+    padding: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `
 

@@ -19,14 +19,20 @@ const Input = styled.input
 
 // react component
 function Search({ result, dispatch }) {
+  const REACT_APP_TMDB_API_KEY=process.env.REACT_APP_TMDB_API_KEY
   const searchMovie = () => {
     if (keyword) {
       const option = {
-        params: {q:keyword}
+        params: {
+          query:keyword,
+          language:"ko-KR",
+          include_adult:true
+        }
       }
-      axios.get("https://finprojectapi.herokuapp.com/api/v1/community/movies/",option)
+      axios.get(`https://api.themoviedb.org/3/search/multi?api_key=${REACT_APP_TMDB_API_KEY}`,option)
         .then(res => {
-          dispatch(searchMovies(res.data))
+          const { data:{results} } = res
+          dispatch(searchMovies(results))
         })
     }
   }

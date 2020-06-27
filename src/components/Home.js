@@ -8,11 +8,12 @@ import scrollMonitor from 'scrollmonitor'
 function Home({ state, dispatch }) {
   const [isLoading,setIsLoading] = useState(true)
   const [pageNum, setPageNum] = useState(1)
-
+  const REACT_APP_TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY
   function myaxios() {
-    axios.get(`https://finprojectapi.herokuapp.com/api/v1/community/movies/?page=${pageNum}`)
+    axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${REACT_APP_TMDB_API_KEY}&language=ko-KR&page=${pageNum}`)
       .then(res => {
-        dispatch(addMovies(res.data))
+        const { data:{results} } = res
+        dispatch(addMovies(results))
         if (isLoading) {setIsLoading(false)}
       })
       .catch(err => console.log(err))
