@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux"
+import { detailMovies } from "../store";
 import axios from "axios"
 import styled from "styled-components";
+import DetailTab from "../components/DetailTab";
 
 const Background = styled.div
 `
@@ -24,12 +27,18 @@ const Content = styled.div
   justify-content: space-around;
   position: relative;
   margin-top : 50px;
+  z-index:2;
+`
+const Img = styled.img
+`
+  @media (max-width: 700px) {
+    display: none
+  }
 `
 
-function Detail({match:{params:{id}}}) {
+function Detail({ id,movie,dispatch }) {
   const [isLoading,setIsLoading] = useState(true)
-  let [movie, setMovie] = useState([])
-  const {title, overview, release_date, backdrop_path, poster_path, genres, imdb_id, production_countries,spoken_languages, vote_average} = movie
+  const { title, overview, release_date, backdrop_path, poster_path, genres, imdb_id, production_countries, vote_average } = movie
   const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY
   const URL = `https://api.themoviedb.org/3/movie/${id}`
   const fetchDetail = () => {
@@ -41,7 +50,7 @@ function Detail({match:{params:{id}}}) {
     }
     axios.get(URL,options)
       .then(res => {
-        setMovie(movie=res.data)
+        dispatch(detailMovies(res.data))
         setIsLoading(false)
       })
   }
@@ -54,14 +63,14 @@ function Detail({match:{params:{id}}}) {
             <Background style={{backgroundImage:`url(https://image.tmdb.org/t/p/w342${backdrop_path})`}}/>
             <Content className="container">
               <div className="mr-4">
-                <img src={`https://image.tmdb.org/t/p/w342${poster_path}`} alt=""/>
+                <Img src={`https://image.tmdb.org/t/p/w342${poster_path}`} alt=""/>
               </div>
               <div>
-                <h4 className="text-center">{title} {`(${release_date.slice(0,4)})`}</h4>
-                <h4>평점 : {vote_average}</h4>
+                <h4 className="text-center mb-3">{title} {`(${release_date.slice(0,4)})`}</h4>
+                <h5>RATING : {vote_average}</h5>
                 <p>{overview}</p>
-                <div className="d-flex">
-                  <h4 className="mr-3">장르:</h4>
+                <div className="d-flex my-3">
+                  <h5 className="mr-3">GENRES </h5>
                   <div>
                     {genres.map((genre,index) =>
                       (<span
@@ -71,14 +80,39 @@ function Detail({match:{params:{id}}}) {
                     </span>))}
                   </div>
                 </div>
+                <div className="d-flex my-3">
+                  <h5 className="mr-3">COUNTRY </h5>
+                  <div>
+                    {production_countries.map((country,index) =>
+                      (<span
+                      className="badge badge-dark mr-2"
+                      key={index}
+                      >
+                        {country.name}
+                      </span>))}
+                  </div>
+                </div>
               </div>
             </Content>
+            <DetailTab id={id} title={title} />
           </div>
-
         )
       }
     </div>
   )
 }
 
-export default Detail
+function mapStateToProps(state, ownProps) {
+  const id = ownProps.match.params.id
+  const { detailReducer } = state
+  return {
+    id: id,
+    movie: detailReducer
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return { dispatch }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps) (Detail)

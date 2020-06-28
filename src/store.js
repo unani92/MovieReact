@@ -2,6 +2,8 @@ import { createAction, createReducer, createStore, combineReducers } from "@redu
 
 export const addMovies = createAction("ADD")
 export const searchMovies = createAction("SEARCH")
+export const detailMovies = createAction("DETAIL")
+export const recommendMovies = createAction("RECOMMEND")
 
 const homeReducer = createReducer([],{
   [addMovies]: (state,action) => {
@@ -13,10 +15,22 @@ const searchReducer = createReducer([], {
     return [...action.payload]
   }
 })
+const detailReducer = createReducer([], {
+  [detailMovies]: (state,action) => {
+    return action.payload
+  }
+})
+const recommendReducer = createReducer([], {
+  [recommendMovies]: (state,action) => {
+    return [...action.payload]
+  }
+})
 
 const reducer = combineReducers({
   homeReducer,
-  searchReducer
+  searchReducer,
+  detailReducer,
+  recommendReducer
 })
 
 const store = createStore(reducer)

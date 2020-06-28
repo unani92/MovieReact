@@ -10,7 +10,8 @@ const Nav = styled.nav
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 2;
+  height: 85px;
+  z-index: 3;
 `
 const List = styled.ul
 `

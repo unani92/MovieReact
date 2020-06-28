@@ -18,7 +18,7 @@ const GlobalStyles = createGlobalStyle
     background-color: #f8f7fa;
     padding-top:50px;
   }
-  .homeMovie {
+  .movie-poster-link {
     width: 300px;
     height: 400px;
   }
@@ -36,6 +36,41 @@ const GlobalStyles = createGlobalStyle
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  @media (max-width: 1000px) {
+    .movie-poster-link {
+      width: 200px;
+      height: 267px;
+    }
+    .no-image {
+      width: 200px;
+      height: 267px;
+    }
+  }
+  @media (max-width: 768px) {
+    .movie-poster-link {
+      width: 150px;
+      height: 220px;
+    }
+    .no-image {
+      width: 150px;
+      height: 220px;
+    }
+  }
+  @media (max-width: 480px) {
+    .movie-poster-link {
+      width: 100px;
+      height: 150px;
+    }
+    .no-image {
+      width: 100px;
+      height: 150px;
+    }
+    p {
+      font-weight: bold;
+      font-size: small;
+      text-align: center;
+    }
   }
 `
 

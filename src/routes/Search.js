@@ -24,7 +24,7 @@ function Search({ result, dispatch }) {
     if (keyword) {
       const option = {
         params: {
-          query:encodeURIComponent(keyword),
+          query:keyword,
           language:"ko-KR",
           include_adult:true
         }
