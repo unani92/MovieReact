@@ -16,7 +16,7 @@ const Background = styled.div
   top:0;
   left:0;
   width:100%;
-  height:2000px;
+  height:1100px;
   filter: blur(3px);
   opacity: 0.3;
   z-index: 1;
@@ -38,7 +38,7 @@ const Img = styled.img
 
 function Detail({ id,movie,dispatch }) {
   const [isLoading,setIsLoading] = useState(true)
-  const { title, overview, release_date, backdrop_path, poster_path, genres, imdb_id, production_countries, vote_average } = movie
+  const { title, original_title, overview, release_date, backdrop_path, poster_path, genres, production_countries, vote_average } = movie
   const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY
   const URL = `https://api.themoviedb.org/3/movie/${id}`
   const fetchDetail = () => {
@@ -94,7 +94,7 @@ function Detail({ id,movie,dispatch }) {
                 </div>
               </div>
             </Content>
-            <DetailTab id={id} title={title} />
+            <DetailTab id={id} original_title={original_title} />
           </div>
         )
       }

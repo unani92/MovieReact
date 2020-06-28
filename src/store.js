@@ -4,6 +4,7 @@ export const addMovies = createAction("ADD")
 export const searchMovies = createAction("SEARCH")
 export const detailMovies = createAction("DETAIL")
 export const recommendMovies = createAction("RECOMMEND")
+export const youtubeMovies = createAction("YOUTUBE")
 
 const homeReducer = createReducer([],{
   [addMovies]: (state,action) => {
@@ -25,12 +26,18 @@ const recommendReducer = createReducer([], {
     return [...action.payload]
   }
 })
+const youtubeReducer = createReducer([], {
+  [youtubeMovies]: (state,action) => {
+    return action.payload
+  }
+})
 
 const reducer = combineReducers({
   homeReducer,
   searchReducer,
   detailReducer,
-  recommendReducer
+  recommendReducer,
+  youtubeReducer
 })
 
 const store = createStore(reducer)

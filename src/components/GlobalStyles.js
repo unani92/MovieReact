@@ -72,6 +72,9 @@ const GlobalStyles = createGlobalStyle
       text-align: center;
     }
   }
+  .disabled {
+    display: none;
+  }
 `
 
 export default GlobalStyles
