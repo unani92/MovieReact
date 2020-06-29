@@ -11,7 +11,23 @@ const Container = styled.div
   position: relative;
   z-index:2;
 `
-
+function handleClick(event) {
+  const recommend = document.getElementById("recommend")
+  const youtube = document.getElementById("youtube")
+  const recommendBtn = document.getElementById("recommendBtn")
+  const youtubeBtn = document.getElementById("youtubeBtn")
+  if (event.target.id === "recommendBtn") {
+    youtube.classList.add("disabled")
+    recommend.classList.remove("disabled")
+    event.target.setAttribute("disabled",true)
+    youtubeBtn.removeAttribute("disabled")
+  } else {
+    youtube.classList.remove("disabled")
+    recommend.classList.add("disabled")
+    event.target.setAttribute("disabled",true)
+    recommendBtn.removeAttribute("disabled")
+  }
+}
 function DetailTab({ id, original_title, dispatch }) {
   const [recommendLoading, setRecommendLoading] = useState(true)
   const [youtubeLoading, setYoutubeLoading] = useState(true)
@@ -44,23 +60,7 @@ function DetailTab({ id, original_title, dispatch }) {
         setYoutubeLoading(false)
       })
   }
-  function handleClick(event) {
-    const recommend = document.getElementById("recommend")
-    const youtube = document.getElementById("youtube")
-    const recommendBtn = document.getElementById("recommendBtn")
-    const youtubeBtn = document.getElementById("youtubeBtn")
-    if (event.target.id === "recommendBtn") {
-      youtube.classList.add("disabled")
-      recommend.classList.remove("disabled")
-      event.target.setAttribute("disabled",true)
-      youtubeBtn.removeAttribute("disabled")
-    } else {
-      youtube.classList.remove("disabled")
-      recommend.classList.add("disabled")
-      event.target.setAttribute("disabled",true)
-      recommendBtn.removeAttribute("disabled")
-    }
-  }
+
   useEffect(recommend,[])
   useEffect(youtube,[])
 

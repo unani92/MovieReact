@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux"
 import { addMovies } from "../store";
-import Movie from "./Movie"
+import Movie from "../components/Movie"
 import axios from 'axios'
 import scrollMonitor from 'scrollmonitor'
 
@@ -9,7 +9,7 @@ function Home({ state, dispatch }) {
   const [isLoading,setIsLoading] = useState(true)
   const [pageNum, setPageNum] = useState(1)
   const REACT_APP_TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY
-  function myaxios() {
+  function getMovies() {
     axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${REACT_APP_TMDB_API_KEY}&language=ko-KR&page=${pageNum}`)
       .then(res => {
         const { data:{results} } = res
@@ -18,7 +18,7 @@ function Home({ state, dispatch }) {
       })
       .catch(err => console.log(err))
   }
-  useEffect(myaxios,[pageNum])
+  useEffect(getMovies,[pageNum])
 
   if (!isLoading) {
     setTimeout(() => {
