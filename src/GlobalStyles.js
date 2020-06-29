@@ -37,6 +37,23 @@ const GlobalStyles = createGlobalStyle
     justify-content: center;
     align-items: center;
   }
+  .no-image-tv {
+    width: 100px;
+    height: 150px;
+    border: 1px solid black;
+    padding: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .tv-season-img {
+    position: relative;
+    width: 100px;
+    height: auto;
+    margin-right: 1rem;
+    z-index: 2;
+  }
   @media (max-width: 1000px) {
     .movie-poster-link {
       width: 200px;
@@ -65,6 +82,18 @@ const GlobalStyles = createGlobalStyle
     .no-image {
       width: 100px;
       height: 150px;
+    }
+    .tv-season-img {
+      width: 50px;
+      height: auto;
+    }
+    .no-image-tv {
+      width: 50px;
+      height: 70px;
+    }
+    .no-image-tv span {
+      font-weight: bold;
+      font-size: 1rem;
     }
     p {
       font-weight: bold;

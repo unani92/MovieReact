@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import { detailMovies } from "../store";
 import axios from "axios"
 import styled from "styled-components";
-import DetailTab from "../components/DetailTab";
+import TvDetailTab from "./TvDetailTab";
 
 const Background = styled.div
 `
@@ -104,7 +104,9 @@ function TvDetail({ id,tv,dispatch }) {
                 </div>
               </div>
             </Content>
-            {/*<DetailTab id={id} original_title={original_name} />*/}
+            <div className="container">
+              <TvDetailTab seasons={seasons}/>
+            </div>
           </div>
         )
       }

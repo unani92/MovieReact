@@ -32,36 +32,42 @@ function TvHome({ onAir, popular, dispatch }) {
     }
   }
 
-  function handleClick() {
+  function handleClick(event) {
+    const onAirBtn = document.querySelector("#onAirBtn")
+    const popularBtn = document.querySelector("#popularBtn")
     if (tabState === "onAir") {
       setTabState("popular")
       setTabdata([...popular])
+      popularBtn.setAttribute("disabled",true)
+      onAirBtn.removeAttribute("disabled")
     } else {
       setTabState("onAir")
       setTabdata([...onAir])
+      onAirBtn.setAttribute("disabled",true)
+      popularBtn.removeAttribute("disabled")
     }
   }
 
   function getOnAir() {
     axios.get(`https://api.themoviedb.org/3/tv/on_the_air?page=${onAirPageNum}`, option)
       .then(res => {
-        console.log(onAirPageNum)
         const { data:{results} } = res
         dispatch(tvOnAir(results))
         setTabdata([...onAir])
         if (onAirLoading) {setOnAirLoading(false)}
+        console.log(res)
       })
       .catch(err => console.log(err))
   }
 
   function getPopular() {
-    console.log(popularPageNum)
     axios.get(`https://api.themoviedb.org/3/tv/popular?page=${popularPageNum}`, option)
       .then(res => {
         const { data:{results} } = res
         dispatch(tvPopular(results))
         setTabdata([...popular])
         if (popularLoading) {setPopularLoding(false)}
+        console.log(res)
       })
       .catch(err => console.log(err))
   }
@@ -79,14 +85,14 @@ function TvHome({ onAir, popular, dispatch }) {
         watcher.enterViewport(() => setTimeout(
           () => setPopularPageNum(popularPageNum+1)
         ),500)}
-    },700)
+    },500)
   }
 
   return (
     <Container className="container">
       <BtnTab>
-        <button onClick={handleClick} className="btn btn-warning font-weight-bold text-white mr-3">On Air</button>
-        <button onClick={handleClick} className="btn btn-warning font-weight-bold text-white">Popular</button>
+        <button onClick={handleClick} id="onAirBtn" className="btn btn-warning font-weight-bold text-white mr-3">On Air</button>
+        <button onClick={handleClick} id="popularBtn" className="btn btn-warning font-weight-bold text-white">Popular</button>
       </BtnTab>
       {!onAirLoading && !popularLoading ?
         (<div className="row">
