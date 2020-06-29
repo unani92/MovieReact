@@ -36,7 +36,13 @@ function Home({ state, dispatch }) {
         (<div className="row">
           {state.map((movie,index) => (
             <div key={index} className="col-4">
-              <Movie key={index} id={movie.id} poster_path={movie.poster_path} title={movie.title}/>
+              <Movie
+                key={index}
+                id={movie.id}
+                poster_path={movie.poster_path}
+                title={movie.title}
+                vote_average={movie.vote_average}
+              />
             </div>
           ))}
           <div id="bottomSensor"></div>

@@ -106,6 +106,7 @@ const GlobalStyles = createGlobalStyle
   }
   img:hover {
     filter: brightness(0.4);
+    transition: all 0.3s ease-in-out;
   }
 `
 
