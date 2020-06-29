@@ -14,7 +14,7 @@ const GlobalStyles = createGlobalStyle
     box-sizing: border-box;
   }
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-family: 'Noto Sans KR', sans-serif;
     background-color: #f8f7fa;
     padding-top:50px;
   }

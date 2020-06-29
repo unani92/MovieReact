@@ -58,6 +58,8 @@ function DetailTab({ id, original_title, dispatch }) {
         const {data:{items}} = res
         dispatch(youtubeMovies(items[0]))
         setYoutubeLoading(false)
+        const youtubeBtn = document.getElementById("youtubeBtn")
+        youtubeBtn.setAttribute("disabled",true)
       })
   }
 
