@@ -19,7 +19,7 @@ const BtnTab = styled.div
 
 function TvHome({ onAir, popular, dispatch }) {
   let [tabState,setTabState] = useState("onAir")
-  let[tabData, setTabdata] = useState([])
+  let[tabData, setTabdata] = useState(onAir)
   const [onAirLoading,setOnAirLoading] = useState(true)
   const [popularLoading, setPopularLoding] = useState(true)
   const [onAirPageNum, setOnAirPageNum] = useState(1)
@@ -35,27 +35,32 @@ function TvHome({ onAir, popular, dispatch }) {
   function handleClick(event) {
     const onAirBtn = document.querySelector("#onAirBtn")
     const popularBtn = document.querySelector("#popularBtn")
-    if (tabState === "onAir") {
-      setTabState("popular")
-      setTabdata([...popular])
-      popularBtn.setAttribute("disabled",true)
-      onAirBtn.removeAttribute("disabled")
+    if (event.target.id === "onAirBtn") {
+      setTimeout(()=> {
+        setTabdata([...onAir])
+        setTabState("onAir")
+        onAirBtn.setAttribute("disabled",true)
+        popularBtn.removeAttribute("disabled")
+      },500)
     } else {
-      setTabState("onAir")
-      setTabdata([...onAir])
-      onAirBtn.setAttribute("disabled",true)
-      popularBtn.removeAttribute("disabled")
+      setTimeout(() => {
+        setTabdata([...popular])
+        setTabState("popular")
+        popularBtn.setAttribute("disabled",true)
+        onAirBtn.removeAttribute("disabled")
+      },500)
     }
   }
 
   function getOnAir() {
+    const onAirBtn = document.querySelector("#onAirBtn")
     axios.get(`https://api.themoviedb.org/3/tv/on_the_air?page=${onAirPageNum}`, option)
       .then(res => {
         const { data:{results} } = res
         dispatch(tvOnAir(results))
         setTabdata([...onAir])
         if (onAirLoading) {setOnAirLoading(false)}
-        console.log(res)
+        onAirBtn.setAttribute("disabled",true)
       })
       .catch(err => console.log(err))
   }
@@ -67,7 +72,6 @@ function TvHome({ onAir, popular, dispatch }) {
         dispatch(tvPopular(results))
         setTabdata([...popular])
         if (popularLoading) {setPopularLoding(false)}
-        console.log(res)
       })
       .catch(err => console.log(err))
   }
@@ -108,7 +112,7 @@ function TvHome({ onAir, popular, dispatch }) {
   )
 }
 function mapStateToProps(state) {
-  const {   tvOnAirReducer, tvPopularReducer, } = state
+  const { tvOnAirReducer, tvPopularReducer } = state
   return { onAir: tvOnAirReducer, popular: tvPopularReducer }
 }
 function mapDispatchToProps(dispatch) {

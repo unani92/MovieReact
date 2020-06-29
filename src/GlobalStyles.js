@@ -104,6 +104,9 @@ const GlobalStyles = createGlobalStyle
   .disabled {
     display: none;
   }
+  img:hover {
+    filter: brightness(0.4);
+  }
 `
 
 export default GlobalStyles

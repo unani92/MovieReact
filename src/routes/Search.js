@@ -37,11 +37,16 @@ function Search({ result, dispatch }) {
     }
   }
   const [keyword, setKeyword] = useState("")
+  const input = document.querySelector("input")
   const onChange = event => setKeyword(event.target.value)
-  const onClick = () => searchMovie()
+  const onClick = () => {
+    searchMovie()
+    input.value = null
+  }
   const onSubmit = (event) => {
     event.preventDefault()
     searchMovie()
+    input.value = null
   }
   return (
     <div className="my-5 container text-center">
