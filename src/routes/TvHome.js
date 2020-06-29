@@ -4,9 +4,22 @@ import { tvOnAir, tvPopular } from "../store";
 import Tv from "../components/Tv"
 import axios from 'axios'
 import scrollMonitor from 'scrollmonitor'
+import styled from "styled-components";
 
-function TvHome({ onAir, dispatch }) {
-  const [tabState,setTabState] = useState("onAir")
+const Container = styled.div
+`
+  margin-top:50px;
+`
+const BtnTab = styled.div
+`
+  padding-left: 1rem;
+  font-weight: bold;
+  color: white;
+`
+
+function TvHome({ onAir, popular, dispatch }) {
+  let [tabState,setTabState] = useState("onAir")
+  let[tabData, setTabdata] = useState([])
   const [onAirLoading,setOnAirLoading] = useState(true)
   const [popularLoading, setPopularLoding] = useState(true)
   const [onAirPageNum, setOnAirPageNum] = useState(1)
@@ -18,40 +31,74 @@ function TvHome({ onAir, dispatch }) {
       language: "ko-KR",
     }
   }
+
+  function handleClick() {
+    if (tabState === "onAir") {
+      setTabState("popular")
+      setTabdata([...popular])
+    } else {
+      setTabState("onAir")
+      setTabdata([...onAir])
+    }
+  }
+
   function getOnAir() {
     axios.get(`https://api.themoviedb.org/3/tv/on_the_air?page=${onAirPageNum}`, option)
       .then(res => {
+        console.log(onAirPageNum)
         const { data:{results} } = res
         dispatch(tvOnAir(results))
+        setTabdata([...onAir])
         if (onAirLoading) {setOnAirLoading(false)}
       })
       .catch(err => console.log(err))
   }
-  useEffect(getOnAir,[onAirPageNum])
 
-  if (!onAirLoading) {
+  function getPopular() {
+    console.log(popularPageNum)
+    axios.get(`https://api.themoviedb.org/3/tv/popular?page=${popularPageNum}`, option)
+      .then(res => {
+        const { data:{results} } = res
+        dispatch(tvPopular(results))
+        setTabdata([...popular])
+        if (popularLoading) {setPopularLoding(false)}
+      })
+      .catch(err => console.log(err))
+  }
+  useEffect(getOnAir,[onAirPageNum])
+  useEffect(getPopular,[popularPageNum])
+
+  if (!onAirLoading && !popularLoading) {
     setTimeout(() => {
       const bottomSensor = document.getElementById("bottomSensor")
       const watcher = scrollMonitor.create(bottomSensor)
-      watcher.enterViewport(() => setTimeout(
-        () => setOnAirPageNum(onAirPageNum+1)
-      ),500)
-    },500)
+      if (tabState === "onAir") {
+        watcher.enterViewport(() => setTimeout(
+          () => setOnAirPageNum(onAirPageNum+1)
+        ),500)} else {
+        watcher.enterViewport(() => setTimeout(
+          () => setPopularPageNum(popularPageNum+1)
+        ),500)}
+    },700)
   }
 
   return (
-    <div className="container">
-      {onAirLoading ? <div className="text-center my-5"><i className="fas fa-spinner"></i></div> :
+    <Container className="container">
+      <BtnTab>
+        <button onClick={handleClick} className="btn btn-warning font-weight-bold text-white mr-3">On Air</button>
+        <button onClick={handleClick} className="btn btn-warning font-weight-bold text-white">Popular</button>
+      </BtnTab>
+      {!onAirLoading && !popularLoading ?
         (<div className="row">
-          {onAir.map((tv,index) => (
+          {tabData.map((tv,index) => (
             <div key={index} className="col-4">
               <Tv key={index} id={tv.id} poster_path={tv.poster_path} title={tv.name}/>
             </div>
           ))}
           <div id="bottomSensor"></div>
-        </div>)
+        </div>) : "loading"
       }
-    </div>
+    </Container>
   )
 }
 function mapStateToProps(state) {
