@@ -1,4 +1,4 @@
-import { createAction, createReducer, createStore, combineReducers, configureStore } from "@reduxjs/toolkit";
+import { createAction, createReducer, combineReducers, configureStore } from "@reduxjs/toolkit";
 
 export const addMovies = createAction("ADD")
 export const searchMovies = createAction("SEARCH")

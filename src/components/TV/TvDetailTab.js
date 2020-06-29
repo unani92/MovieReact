@@ -1,18 +1,4 @@
 import React from "react";
-import styled from "styled-components";
-
-const Img = styled.img
-`
-  position: relative;
-  width: 100px;
-  height: auto;
-  margin-right: 1rem;
-  z-index: 2;
-`
-const NoImage = styled.div
-`
-
-`
 
 function TvDetailTab({ seasons }) {
   return (

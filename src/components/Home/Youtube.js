@@ -6,7 +6,7 @@ function Youtube({ video }) {
   const videoURL = `https://www.youtube.com/embed/${videoId}`
   return (
     <div className="video container embed-responsive embed-responsive-16by9">
-      <iframe src={videoURL} frameBorder="0"/>
+      <iframe title={videoId} src={videoURL} frameBorder="0"/>
     </div>
 
   )
