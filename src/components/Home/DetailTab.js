@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios"
 import styled from "styled-components";
-import { recommendMovies, youtubeMovies } from "../store";
+import { recommendMovies, youtubeMovies } from "../../store";
 import { connect } from "react-redux"
 import Recommend from "./Recommend";
 import Youtube from "./Youtube";

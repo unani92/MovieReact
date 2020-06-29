@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import { detailMovies } from "../store";
 import axios from "axios"
 import styled from "styled-components";
-import DetailTab from "../components/DetailTab";
+import DetailTab from "../components/Home/DetailTab";
 
 const Background = styled.div
 `

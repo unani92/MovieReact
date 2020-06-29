@@ -1,11 +1,11 @@
 import React from "react";
 import {BrowserRouter, Route, Redirect, Switch} from "react-router-dom";
 import Header from "./Header";
-import Home from "../routes/Home";
-import Search from "../routes/Search";
-import Detail from "../routes/Detail";
-import TvHome from "../routes/TvHome";
-import TvDetail from "./TvDetail";
+import Home from "../../routes/Home";
+import Search from "../../routes/Search";
+import Detail from "../../routes/Detail";
+import TvHome from "../../routes/TvHome";
+import TvDetail from "../TV/TvDetail";
 
 function Router() {
   return (

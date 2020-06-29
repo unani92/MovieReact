@@ -4,7 +4,7 @@ import styled from "styled-components";
 import axios from 'axios'
 import scrollMonitor from 'scrollmonitor'
 import { tvOnAir, tvPopular } from "../store";
-import Tv from "../components/Tv"
+import Tv from "../components/TV/Tv"
 
 const Container = styled.div
 `

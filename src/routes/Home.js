@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux"
 import { addMovies } from "../store";
-import Movie from "../components/Movie"
+import Movie from "../components/Home/Movie"
 import axios from 'axios'
 import scrollMonitor from 'scrollmonitor'
 

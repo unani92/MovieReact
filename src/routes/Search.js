@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import { searchMovies } from "../store";
 import styled from "styled-components";
 import axios from 'axios'
-import Movie from "../components/Movie";
+import Movie from "../components/Home/Movie";
 
 //stylesheet
 const Input = styled.input

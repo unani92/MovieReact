@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux"
-import { detailMovies } from "../store";
+import { detailMovies } from "../../store";
 import axios from "axios"
 import styled from "styled-components";
 import TvDetailTab from "./TvDetailTab";
