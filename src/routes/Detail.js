@@ -36,7 +36,7 @@ const Img = styled.img
   }
 `
 
-function Detail({ id,movie,dispatch }) {
+function Detail({ id,movie,dispatch },props) {
   const [isLoading,setIsLoading] = useState(true)
   const { title, original_title, overview, release_date, backdrop_path, poster_path, genres, production_countries, vote_average } = movie
   const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY
