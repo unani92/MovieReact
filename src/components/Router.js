@@ -5,6 +5,7 @@ import Home from "../routes/Home";
 import Search from "../routes/Search";
 import Detail from "../routes/Detail";
 import TvHome from "../routes/TvHome";
+import TvDetail from "./TvDetail";
 
 function Router() {
   return (
@@ -14,7 +15,7 @@ function Router() {
       <Switch>
         <Route path="/" exact component={Home}/>
         <Route path="/tv" exact component={TvHome}/>
-        <Route path="/tv/:id" exact component={Detail}/>
+        <Route path="/tv/:id" exact component={TvDetail}/>
         <Route path="/search" component={Search}/>
         <Route path="/:id" component={Detail}/>
         {/* 해당하는 라우트가 없을 경우 홈으로 보내주세요.... */}

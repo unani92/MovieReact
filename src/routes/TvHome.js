@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux"
-import { tvOnAir, tvPopular } from "../store";
-import Tv from "../components/Tv"
+import styled from "styled-components";
 import axios from 'axios'
 import scrollMonitor from 'scrollmonitor'
-import styled from "styled-components";
+import { tvOnAir, tvPopular } from "../store";
+import Tv from "../components/Tv"
 
 const Container = styled.div
 `
